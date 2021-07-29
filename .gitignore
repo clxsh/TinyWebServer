@@ -1,1 +1,7 @@
 .vscode/
+.gdb_history
+server.log
+
+CMakeFiles/
+cmake_install.cmake
+CMakeCache.txt

@@ -74,7 +74,7 @@ void *startThread(void *obj)
     return nullptr;
 }
 
-Thread::Thread(const ThreadFunc &_func, const string &_name = "Thread")
+Thread::Thread(const ThreadFunc &_func, const string &_name)
     : started(false),
       joined(false),
       pthreadId(0),
@@ -84,6 +84,12 @@ Thread::Thread(const ThreadFunc &_func, const string &_name = "Thread")
       latch(1)
 {
     // setDefaultName();
+}
+
+Thread::~Thread()
+{
+    if (started && !joined)
+        pthread_detach(pthreadId);
 }
 
 void Thread::setDefaultName()
