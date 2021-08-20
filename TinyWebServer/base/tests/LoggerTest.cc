@@ -53,7 +53,7 @@ void stressing_multi_threads(int threadNum = 4)
     for (int i = 0; i < threadNum; ++i)
     {
         shared_ptr<Thread> tmp(new Thread(threadFunc, "testFunc"));
-        vsp.push_back(tmp);
+        vsp.emplace_back(move(tmp));
     }
     for (int i = 0; i < threadNum; ++i)
     {
