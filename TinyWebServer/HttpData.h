@@ -7,6 +7,7 @@
 #include <memory>
 #include <string>
 #include <unordered_map>
+
 #include "Timer.h"
 
 class EventLoop;
@@ -95,9 +96,18 @@ public:
         timer = mtimer;
     }
 
-    std::shared_ptr<Channel> getChannel() { return channel; }
-    EventLoop *getLoop() { return loop; }
+    std::shared_ptr<Channel> getChannel()
+    {
+        return channel;
+    }
+
+    EventLoop *getLoop()
+    {
+        return loop;
+    }
+
     void handleClose();
+    
     void newEvent();
 
 private:
