@@ -16,7 +16,7 @@ Server::Server(EventLoop *_loop, int _threadNum, int _port)
       acceptChannel(make_shared<Channel>(_loop)),
       listenfd(socket_bind_listen(_port))
 {
-    acceptChannel->setFd(port);
+    acceptChannel->setFd(listenfd);
     handle_for_sigpipe();
     set_nonblocking(listenfd);
 }
@@ -54,6 +54,7 @@ void Server::handleNewConn()
         shared_ptr<HttpData> req_info = make_shared<HttpData>(loop, accept_fd);
         req_info->getChannel()->setHolder(req_info);
         loop->queueInLoop(std::bind(&HttpData::newEvent, req_info));
+        LOG << "new connection handled, fd: " << accept_fd;
     }
     acceptChannel->setEvents(EPOLLIN | EPOLLET);
 }

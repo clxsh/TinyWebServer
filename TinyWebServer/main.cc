@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
                 port = atoi(optarg);
                 break;
             case 'h':
-                printf("usage: %s [-p port_num] [-t thread_num] [-l log_path] [-h]");
+                printf("usage: %s [-p port_num] [-t thread_num] [-l log_path] [-h]", argv[0]);
                 break;
             default:
                 break;

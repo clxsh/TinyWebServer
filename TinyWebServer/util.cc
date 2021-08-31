@@ -9,6 +9,7 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include <assert.h>
+#include <iostream>
 
 constexpr int MAX_BUF   = 4096;
 constexpr int QUEUE_NUM = 2048;
@@ -47,7 +48,7 @@ ssize_t readn(int fd, std::string &in_buf, bool &read_zero)
 
     while (true) {
         char buf[MAX_BUF];
-        if ((nread == read(fd, buf, MAX_BUF)) < 0) {
+        if ((nread = read(fd, buf, MAX_BUF)) < 0) {
             if (errno == EINTR)
                 continue;
             else if (errno == EAGAIN)
@@ -62,7 +63,10 @@ ssize_t readn(int fd, std::string &in_buf, bool &read_zero)
 
         read_sum += nread;
         in_buf += std::string(buf, buf + nread);
+        std::cout << buf << "\n";
     }
+
+    std::cout <<  "read_sum: " << read_sum << "\n\n\n";
 
     return read_sum;
 }

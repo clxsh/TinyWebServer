@@ -35,7 +35,7 @@ public:
 
     Channel(EventLoop *_loop, int _fd)
         : loop(_loop), fd(_fd), events(0), lastEvents(0) {}
-    ~Channel();
+    ~Channel() = default;
 
     int getFd()
     {

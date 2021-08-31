@@ -16,8 +16,8 @@ void EventLoopThreadPool::start()
 
     for (int i = 0; i < numThreads; ++i) {
         std::shared_ptr<EventLoopThread> t = make_shared<EventLoopThread>();
-        threads.emplace_back(move(t));
         loops.push_back(t->startLoop());
+        threads.emplace_back(move(t));        
     }
 }
 

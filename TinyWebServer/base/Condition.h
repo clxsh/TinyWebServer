@@ -23,7 +23,6 @@ public:
 
     void wait()
     {
-        // where to exec mutex.lock ?
         pthread_cond_wait(&cond, mutex.get());
     }
 
@@ -43,7 +42,6 @@ public:
         clock_gettime(CLOCK_REALTIME, &abstime);
         abstime.tv_sec += static_cast<time_t>(seconds);
 
-        // where to exec mutex.lock ?
         return ETIMEDOUT == pthread_cond_timedwait(&cond, mutex.get(), &abstime);
     }
 
